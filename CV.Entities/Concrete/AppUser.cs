@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using CV.Entities.Interfaces;
 
 namespace CV.Entities.Concrete
@@ -15,5 +16,6 @@ namespace CV.Entities.Concrete
         public string Username { get; set; }
         public string PasswordHash { get; set; }
         public string ShortDescription { get; set; }
+        public List<SocialMediaIcon> SocialMediaIcons { get; set; }
     }
 }
