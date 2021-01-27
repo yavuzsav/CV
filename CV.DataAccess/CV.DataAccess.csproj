@@ -5,10 +5,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Concrete\Dapper" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\CV.Entities\CV.Entities.csproj" />
     </ItemGroup>
 
