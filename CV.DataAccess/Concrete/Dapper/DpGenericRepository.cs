@@ -43,16 +43,19 @@ namespace CV.DataAccess.Concrete.Dapper
         public void Insert(TEntity entity)
         {
             _dbConnection.Insert(entity, _dbTransaction);
+            _dbTransaction.Commit();
         }
 
         public void Update(TEntity entity)
         {
             _dbConnection.Update(entity, _dbTransaction);
+            _dbTransaction.Commit();
         }
 
         public void Delete(TEntity entity)
         {
             _dbConnection.Delete(entity, _dbTransaction);
+            _dbTransaction.Commit();
         }
     }
 }
