@@ -11,9 +11,12 @@
 
     <ItemGroup>
       <PackageReference Include="FluentValidation.AspNetCore" Version="9.5.0" />
+      <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="9.5.0" />
+      <PackageReference Include="Microsoft.Data.SqlClient" Version="2.1.1" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\CV.DataAccess\CV.DataAccess.csproj" />
       <ProjectReference Include="..\CV.DTO\CV.DTO.csproj" />
     </ItemGroup>
 
