@@ -7,7 +7,7 @@ namespace CV.Business.ValidationRules.CertificationValidators
     {
         public CertificationForAddValidator()
         {
-            RuleFor(x => x.Description);
+            RuleFor(x => x.Description).NotEmpty();
         }
     }
 }
