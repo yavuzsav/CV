@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using CV.Business.IoC.Microsoft;
 using CV.DTO.DTOs.AppUserDtos;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +28,15 @@ namespace CV.Mvc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.Cookie.Name = "CV";
+                options.Cookie.SameSite = SameSiteMode.Strict;
+                options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+                options.ExpireTimeSpan = TimeSpan.FromDays(30);
+            });
+
             services.AddControllersWithViews()
                 .AddFluentValidation(cfg => { cfg.RegisterValidatorsFromAssemblyContaining<AppUserForUpdateDto>(); });
 
@@ -52,6 +63,7 @@ namespace CV.Mvc
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
