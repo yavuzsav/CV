@@ -1,9 +1,9 @@
 using System.Data;
-using CV.Business.ValidationRules.AppUserValidators;
+using CV.Business.Concrete;
+using CV.Business.HashTool;
+using CV.Business.Interfaces;
 using CV.DataAccess.Concrete.Dapper;
 using CV.DataAccess.Interfaces;
-using CV.DTO.DTOs.AppUserDtos;
-using FluentValidation;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,9 +17,22 @@ namespace CV.Business.IoC.Microsoft
             services.AddTransient<IDbConnection>(con =>
                 new SqlConnection(configuration.GetConnectionString("DbConnection")));
 
+            #region Business
+
+            // services.AddTransient<IValidator<AppUserForUpdateDto>, AppUserForUpdateValidator>();
+            services.AddTransient<IAppUserService, AppUserManager>();
+            services.AddScoped<IPasswordHasher, PasswordHasher>();
+            // services.AddOptions<HashingOptions>();
+            
+
+            #endregion
+
+            #region DataAccess
+
+            services.AddTransient<IAppUserRepository, DpAppUserRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(DpGenericRepository<>));
 
-            services.AddTransient<IValidator<AppUserForUpdateDto>, AppUserForUpdateValidator>();
+            #endregion
         }
     }
 }

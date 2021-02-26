@@ -1,4 +1,7 @@
-$HEADER$namespace $NAMESPACE$
+namespace CV.Business.Interfaces
 {
-  public class $CLASS$ {$END$}
+    public interface IAppUserService
+    {
+        public bool Authenticate(string userName, string password);
+    }
 }

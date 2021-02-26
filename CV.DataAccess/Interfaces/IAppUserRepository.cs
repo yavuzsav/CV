@@ -1,4 +1,10 @@
-$HEADER$namespace $NAMESPACE$
+using CV.Entities.Concrete;
+
+namespace CV.DataAccess.Interfaces
 {
-  public interface $INTERFACE$ {$END$}
+    public interface IAppUserRepository : IGenericRepository<AppUser>
+    {
+        bool Authenticate(string userName, string passwordHash);
+        string GetPasswordHashByUserName(string userName);
+    }
 }

@@ -1,4 +1,7 @@
-$HEADER$namespace $NAMESPACE$
+namespace CV.Business.HashTool
 {
-  public class $CLASS$ {$END$}
+    public sealed class HashingOptions
+    {
+        public int Iterations { get; set; } = 10000;
+    }
 }

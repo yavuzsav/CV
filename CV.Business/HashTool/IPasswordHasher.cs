@@ -1,4 +1,9 @@
-$HEADER$namespace $NAMESPACE$
+namespace CV.Business.HashTool
 {
-  public interface $INTERFACE$ {$END$}
+    public interface IPasswordHasher
+    {
+        string Hash(string password);
+  
+        bool Check(string hash, string password);
+    }
 }

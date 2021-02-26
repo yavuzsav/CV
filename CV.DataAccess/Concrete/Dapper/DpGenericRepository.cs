@@ -11,13 +11,11 @@ namespace CV.DataAccess.Concrete.Dapper
     public class DpGenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class, IEntity, new()
     {
         private readonly IDbConnection _dbConnection;
-        private readonly IDbTransaction _dbTransaction;
 
         public DpGenericRepository(IDbConnection dbConnection)
         {
             _dbConnection = dbConnection;
             _dbConnection.Open();
-            _dbTransaction = _dbConnection.BeginTransaction();
         }
 
         public async Task<List<TEntity>> GetAllAsync()
@@ -42,20 +40,17 @@ namespace CV.DataAccess.Concrete.Dapper
 
         public void Insert(TEntity entity)
         {
-            _dbConnection.Insert(entity, _dbTransaction);
-            _dbTransaction.Commit();
+            _dbConnection.Insert(entity);
         }
 
         public void Update(TEntity entity)
         {
-            _dbConnection.Update(entity, _dbTransaction);
-            _dbTransaction.Commit();
+            _dbConnection.Update(entity);
         }
 
         public void Delete(TEntity entity)
         {
-            _dbConnection.Delete(entity, _dbTransaction);
-            _dbTransaction.Commit();
+            _dbConnection.Delete(entity);
         }
     }
 }
