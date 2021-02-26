@@ -35,6 +35,7 @@ namespace CV.Mvc
                 options.Cookie.SameSite = SameSiteMode.Strict;
                 options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
                 options.ExpireTimeSpan = TimeSpan.FromDays(30);
+                options.LoginPath = new PathString("/Auth/Login");
             });
 
             services.AddControllersWithViews()
