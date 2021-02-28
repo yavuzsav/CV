@@ -1,6 +1,9 @@
+using AutoMapper;
 using CV.Business.HashTool;
 using CV.Business.Interfaces;
 using CV.DataAccess.Interfaces;
+using CV.DTO.DTOs.AppUserDtos;
+using CV.Entities.Concrete;
 
 namespace CV.Business.Concrete
 {
@@ -8,11 +11,13 @@ namespace CV.Business.Concrete
     {
         private readonly IAppUserRepository _userRepository;
         private readonly IPasswordHasher _passwordHasher;
+        private readonly IMapper _mapper;
 
-        public AppUserManager(IAppUserRepository userRepository, IPasswordHasher passwordHasher)
+        public AppUserManager(IAppUserRepository userRepository, IPasswordHasher passwordHasher, IMapper mapper)
         {
             _userRepository = userRepository;
             _passwordHasher = passwordHasher;
+            _mapper = mapper;
         }
 
         public bool Authenticate(string userName, string password)
@@ -24,6 +29,13 @@ namespace CV.Business.Concrete
             var check = _passwordHasher.Check(passwordHash, password);
 
             return check && _userRepository.Authenticate(userName, passwordHash);
+        }
+
+        public AppUserForListDto FindByUserName(string userName)
+        {
+            var user = _userRepository.FindByUserName(userName);
+
+            return _mapper.Map<AppUser, AppUserForListDto>(user);
         }
     }
 }

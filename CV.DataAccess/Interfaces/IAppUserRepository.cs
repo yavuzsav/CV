@@ -6,5 +6,6 @@ namespace CV.DataAccess.Interfaces
     {
         bool Authenticate(string userName, string passwordHash);
         string GetPasswordHashByUserName(string userName);
+        AppUser FindByUserName(string userName);
     }
 }

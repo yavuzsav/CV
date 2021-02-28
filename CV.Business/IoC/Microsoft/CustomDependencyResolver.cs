@@ -2,6 +2,7 @@ using System.Data;
 using CV.Business.Concrete;
 using CV.Business.HashTool;
 using CV.Business.Interfaces;
+using CV.Business.MappingProfiles;
 using CV.DataAccess.Concrete.Dapper;
 using CV.DataAccess.Interfaces;
 using Microsoft.Data.SqlClient;
@@ -23,7 +24,6 @@ namespace CV.Business.IoC.Microsoft
             services.AddTransient<IAppUserService, AppUserManager>();
             services.AddScoped<IPasswordHasher, PasswordHasher>();
             // services.AddOptions<HashingOptions>();
-            
 
             #endregion
 

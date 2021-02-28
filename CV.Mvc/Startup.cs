@@ -38,6 +38,9 @@ namespace CV.Mvc
                 options.LoginPath = new PathString("/Auth/Login");
             });
 
+            services.AddAutoMapper(typeof(MappingProfiles.UserMappingProfile),
+                typeof(Business.MappingProfiles.UserMappingProfile));
+
             services.AddControllersWithViews()
                 .AddFluentValidation(cfg => { cfg.RegisterValidatorsFromAssemblyContaining<AppUserForUpdateDto>(); });
 

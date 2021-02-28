@@ -36,5 +36,14 @@ namespace CV.DataAccess.Concrete.Dapper
                 });
             return passwordHash;
         }
+
+        public AppUser FindByUserName(string userName)
+        {
+            return _dbConnection.QueryFirstOrDefault<AppUser>("select * from AppUsers where Username=@userName",
+                new
+                {
+                    userName
+                });
+        }
     }
 }
